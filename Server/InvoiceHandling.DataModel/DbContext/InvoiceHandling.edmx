@@ -1,0 +1,1716 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InvoiceHandlingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nic" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="SystemUserId" Type="int" Nullable="false" />
+          <Property Name="UserStatusTypeId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="ProfileImage" Type="nvarchar(max)" />
+          <Property Name="UserRoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="EntityId" Type="int" />
+        </EntityType>
+        <EntityType Name="BankAcount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Bank" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Branch" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Info" Type="varchar" MaxLength="50" />
+          <Property Name="ServiceProviderId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyHolderName" Type="varchar" MaxLength="200" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="ServiceProviderId" Type="int" Nullable="false" />
+          <Property Name="RatingLevel" Type="int" />
+          <Property Name="JobType" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ForgotPassword">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="ResetedBy" Type="int" />
+          <Property Name="ResetedDate" Type="datetime" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="ServiceProvideId" Type="int" Nullable="false" />
+          <Property Name="Quentity" Type="int" />
+          <Property Name="SubTotal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ServiceFee" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="InvoiceSubject" Type="varchar" MaxLength="100" />
+          <Property Name="InvoiceStatus" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InvoiceItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemDescription" Type="varchar(max)" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="50" />
+          <Property Name="ItemName" Type="varchar" MaxLength="100" />
+          <Property Name="EstimatedQuentity" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Quotation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefferenceId" Type="int" />
+          <Property Name="ApprovedAdminId" Type="int" />
+          <Property Name="EstimatedSubTotal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="EstimatedServiceFee" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="EstimatedTotal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="JobDescription" Type="varchar(max)" />
+          <Property Name="ServiceProviderId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="QuatationRequestId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="QuotationItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuotationId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="QuoteRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="isQuotationCreated" Type="bit" Nullable="false" />
+          <Property Name="PropertyHolderName" Type="varchar" MaxLength="100" />
+          <Property Name="PHAddress" Type="varchar(max)" />
+          <Property Name="PHPhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="JobCategoryId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="QuoteRequestDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuoteRequestId" Type="int" Nullable="false" />
+          <Property Name="ServiceProviderId" Type="int" Nullable="false" />
+          <Property Name="RefId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ServiceProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="Category" Type="varchar" MaxLength="50" />
+          <Property Name="AccountProfileId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SystemUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserGuid" Type="uniqueidentifier" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="PropertyHolderName" Type="varchar" MaxLength="100" />
+          <Property Name="PHAddress" Type="varchar(max)" />
+          <Property Name="PHPhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="AssignStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CallerSystemUserId" Type="int" Nullable="false" />
+          <Property Name="JobCategoryId" Type="int" Nullable="false" />
+          <Property Name="MaximumBudget" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ServiceProviderId" Type="int" />
+          <Property Name="Purpose" Type="varchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserStatusTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WorkOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="ServiceProviderID" Type="int" />
+          <Property Name="PropertyHolderName" Type="varchar" MaxLength="100" />
+          <Property Name="PHAddress" Type="varchar(max)" />
+          <Property Name="PHPhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_AccountProfile_SystemUsers">
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="1" />
+          <End Role="AccountProfile" Type="Self.AccountProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountProfile">
+              <PropertyRef Name="SystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountProfile_UserRole">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="AccountProfile" Type="Self.AccountProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountProfile">
+              <PropertyRef Name="UserRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountProfile_UserStatusTypes">
+          <End Role="UserStatusTypes" Type="Self.UserStatusTypes" Multiplicity="1" />
+          <End Role="AccountProfile" Type="Self.AccountProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStatusTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountProfile">
+              <PropertyRef Name="UserStatusTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankAcount_ServiceProvider">
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="1" />
+          <End Role="BankAcount" Type="Self.BankAcount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAcount">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_JobCategory">
+          <End Role="JobCategory" Type="Self.JobCategory" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_ServiceProvider">
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_ServiceProvider">
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="ServiceProvideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItem_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="InvoiceItem" Type="Self.InvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceItem">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="InvoiceItem" Type="Self.InvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotation_Quotation">
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="1" />
+          <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quotation">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotation_QuoteRequest">
+          <End Role="QuoteRequest" Type="Self.QuoteRequest" Multiplicity="1" />
+          <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quotation">
+              <PropertyRef Name="QuatationRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuotationItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="QuotationItem" Type="Self.QuotationItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuotationItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuotationItem_Quotation">
+          <End Role="Quotation" Type="Self.Quotation" Multiplicity="1" />
+          <End Role="QuotationItem" Type="Self.QuotationItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quotation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuotationItem">
+              <PropertyRef Name="QuotationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequest_JobCategory">
+          <End Role="JobCategory" Type="Self.JobCategory" Multiplicity="1" />
+          <End Role="QuoteRequest" Type="Self.QuoteRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequest">
+              <PropertyRef Name="JobCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequest_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="QuoteRequest" Type="Self.QuoteRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequest">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequestDetails_QuoteRequest">
+          <End Role="QuoteRequest" Type="Self.QuoteRequest" Multiplicity="1" />
+          <End Role="QuoteRequestDetails" Type="Self.QuoteRequestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequestDetails">
+              <PropertyRef Name="QuoteRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequestDetails_ServiceProvider">
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="1" />
+          <End Role="QuoteRequestDetails" Type="Self.QuoteRequestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequestDetails">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceProvider_AccountProfile">
+          <End Role="AccountProfile" Type="Self.AccountProfile" Multiplicity="1" />
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProvider">
+              <PropertyRef Name="AccountProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceProvider_JobCategory">
+          <End Role="JobCategory" Type="Self.JobCategory" Multiplicity="1" />
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProvider">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_JobCategory">
+          <End Role="JobCategory" Type="Self.JobCategory" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="JobCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_ServiceProvider">
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_SystemUsers">
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="CallerSystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkOrder_ServiceProvider">
+          <End Role="ServiceProvider" Type="Self.ServiceProvider" Multiplicity="0..1" />
+          <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="ServiceProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkOrder_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InvoiceHandlingModelStoreContainer">
+          <EntitySet Name="AccountProfile" EntityType="Self.AccountProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankAcount" EntityType="Self.BankAcount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForgotPassword" EntityType="Self.ForgotPassword" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceItem" EntityType="Self.InvoiceItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobCategory" EntityType="Self.JobCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quotation" EntityType="Self.Quotation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuotationItem" EntityType="Self.QuotationItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteRequest" EntityType="Self.QuoteRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteRequestDetails" EntityType="Self.QuoteRequestDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceProvider" EntityType="Self.ServiceProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStatusTypes" EntityType="Self.UserStatusTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkOrder" EntityType="Self.WorkOrder" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccountProfile_SystemUsers" Association="Self.FK_AccountProfile_SystemUsers">
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+            <End Role="AccountProfile" EntitySet="AccountProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountProfile_UserRole" Association="Self.FK_AccountProfile_UserRole">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="AccountProfile" EntitySet="AccountProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountProfile_UserStatusTypes" Association="Self.FK_AccountProfile_UserStatusTypes">
+            <End Role="UserStatusTypes" EntitySet="UserStatusTypes" />
+            <End Role="AccountProfile" EntitySet="AccountProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankAcount_ServiceProvider" Association="Self.FK_BankAcount_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+            <End Role="BankAcount" EntitySet="BankAcount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_JobCategory" Association="Self.FK_Feedback_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategory" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_ServiceProvider" Association="Self.FK_Feedback_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_ServiceProvider" Association="Self.FK_Invoice_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItem_Invoice" Association="Self.FK_InvoiceItem_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="InvoiceItem" EntitySet="InvoiceItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItem_Item" Association="Self.FK_InvoiceItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="InvoiceItem" EntitySet="InvoiceItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotation_Quotation" Association="Self.FK_Quotation_Quotation">
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+            <End Role="Quotation" EntitySet="Quotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotation_QuoteRequest" Association="Self.FK_Quotation_QuoteRequest">
+            <End Role="QuoteRequest" EntitySet="QuoteRequest" />
+            <End Role="Quotation" EntitySet="Quotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuotationItem_Item" Association="Self.FK_QuotationItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="QuotationItem" EntitySet="QuotationItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuotationItem_Quotation" Association="Self.FK_QuotationItem_Quotation">
+            <End Role="Quotation" EntitySet="Quotation" />
+            <End Role="QuotationItem" EntitySet="QuotationItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequest_JobCategory" Association="Self.FK_QuoteRequest_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategory" />
+            <End Role="QuoteRequest" EntitySet="QuoteRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequest_Task" Association="Self.FK_QuoteRequest_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="QuoteRequest" EntitySet="QuoteRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequestDetails_QuoteRequest" Association="Self.FK_QuoteRequestDetails_QuoteRequest">
+            <End Role="QuoteRequest" EntitySet="QuoteRequest" />
+            <End Role="QuoteRequestDetails" EntitySet="QuoteRequestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequestDetails_ServiceProvider" Association="Self.FK_QuoteRequestDetails_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+            <End Role="QuoteRequestDetails" EntitySet="QuoteRequestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceProvider_AccountProfile" Association="Self.FK_ServiceProvider_AccountProfile">
+            <End Role="AccountProfile" EntitySet="AccountProfile" />
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceProvider_JobCategory" Association="Self.FK_ServiceProvider_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategory" />
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_JobCategory" Association="Self.FK_Task_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategory" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_ServiceProvider" Association="Self.FK_Task_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_SystemUsers" Association="Self.FK_Task_SystemUsers">
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkOrder_ServiceProvider" Association="Self.FK_WorkOrder_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProvider" />
+            <End Role="WorkOrder" EntitySet="WorkOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkOrder_Task" Association="Self.FK_WorkOrder_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="WorkOrder" EntitySet="WorkOrder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InvoiceHandlingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SystemUserId" Type="Int32" Nullable="false" />
+          <Property Name="UserStatusTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SystemUser" Relationship="Self.FK_AccountProfile_SystemUsers" FromRole="AccountProfile" ToRole="SystemUsers" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_AccountProfile_UserRole" FromRole="AccountProfile" ToRole="UserRole" />
+          <NavigationProperty Name="UserStatusType" Relationship="Self.FK_AccountProfile_UserStatusTypes" FromRole="AccountProfile" ToRole="UserStatusTypes" />
+          <NavigationProperty Name="ServiceProviders" Relationship="InvoiceHandlingModel.FK_ServiceProvider_AccountProfile" FromRole="AccountProfile" ToRole="ServiceProvider" />
+        </EntityType>
+        <EntityType Name="BankAcount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccountName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceProvider" Relationship="InvoiceHandlingModel.FK_BankAcount_ServiceProvider" FromRole="BankAcount" ToRole="ServiceProvider" />
+        </EntityType>
+        <EntityType Name="ForgotPassword">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ResetedBy" Type="Int32" />
+          <Property Name="ResetedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceProvideId" Type="Int32" Nullable="false" />
+          <Property Name="Quentity" Type="Int32" />
+          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ServiceFee" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="InvoiceSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InvoiceStatus" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InvoiceItems" Relationship="Self.FK_InvoiceItem_Invoice" FromRole="Invoice" ToRole="InvoiceItem" />
+          <NavigationProperty Name="ServiceProvider" Relationship="InvoiceHandlingModel.FK_Invoice_ServiceProvider" FromRole="Invoice" ToRole="ServiceProvider" />
+        </EntityType>
+        <EntityType Name="InvoiceItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_InvoiceItem_Invoice" FromRole="InvoiceItem" ToRole="Invoice" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_InvoiceItem_Item" FromRole="InvoiceItem" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InvoiceItems" Relationship="Self.FK_InvoiceItem_Item" FromRole="Item" ToRole="InvoiceItem" />
+          <NavigationProperty Name="QuotationItems" Relationship="Self.FK_QuotationItem_Item" FromRole="Item" ToRole="QuotationItem" />
+          <Property Name="EstimatedQuentity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="QuotationItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuotationId" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_QuotationItem_Item" FromRole="QuotationItem" ToRole="Item" />
+          <NavigationProperty Name="Quotation" Relationship="InvoiceHandlingModel.FK_QuotationItem_Quotation" FromRole="QuotationItem" ToRole="Quotation" />
+        </EntityType>
+        <EntityType Name="QuoteRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="QuoteRequestDetails" Relationship="Self.FK_QuoteRequestDetails_QuoteRequest" FromRole="QuoteRequest" ToRole="QuoteRequestDetails" />
+          <Property Name="isQuotationCreated" Type="Boolean" Nullable="false" />
+          <Property Name="PropertyHolderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PHAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PHPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="JobCategory" Relationship="InvoiceHandlingModel.FK_QuoteRequest_JobCategory" FromRole="QuoteRequest" ToRole="JobCategory" />
+          <Property Name="TaskId" Type="Int32" />
+          <NavigationProperty Name="Task" Relationship="InvoiceHandlingModel.FK_QuoteRequest_Task" FromRole="QuoteRequest" ToRole="Task" />
+          <NavigationProperty Name="Quotations" Relationship="InvoiceHandlingModel.FK_Quotation_QuoteRequest" FromRole="QuoteRequest" ToRole="Quotation" />
+        </EntityType>
+        <EntityType Name="QuoteRequestDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteRequestId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
+          <Property Name="RefId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="QuoteRequest" Relationship="Self.FK_QuoteRequestDetails_QuoteRequest" FromRole="QuoteRequestDetails" ToRole="QuoteRequest" />
+          <NavigationProperty Name="ServiceProvider" Relationship="InvoiceHandlingModel.FK_QuoteRequestDetails_ServiceProvider" FromRole="QuoteRequestDetail" ToRole="ServiceProvider" />
+        </EntityType>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserGuid" Type="Guid" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AccountProfiles" Relationship="Self.FK_AccountProfile_SystemUsers" FromRole="SystemUsers" ToRole="AccountProfile" />
+          <NavigationProperty Name="Tasks" Relationship="InvoiceHandlingModel.FK_Task_SystemUsers" FromRole="SystemUser" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyHolderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PHAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PHPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssignStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="CallerSystemUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SystemUser" Relationship="InvoiceHandlingModel.FK_Task_SystemUsers" FromRole="Task" ToRole="SystemUser" />
+          <NavigationProperty Name="WorkOrders" Relationship="InvoiceHandlingModel.FK_WorkOrder_Task" FromRole="Task" ToRole="WorkOrder" />
+          <NavigationProperty Name="QuoteRequests" Relationship="InvoiceHandlingModel.FK_QuoteRequest_Task" FromRole="Task" ToRole="QuoteRequest" />
+          <Property Name="JobCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="JobCategory" Relationship="InvoiceHandlingModel.FK_Task_JobCategory" FromRole="Task" ToRole="JobCategory" />
+          <Property Name="MaximumBudget" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ServiceProviderId" Type="Int32" />
+          <NavigationProperty Name="ServiceProvider" Relationship="InvoiceHandlingModel.FK_Task_ServiceProvider" FromRole="Task" ToRole="ServiceProvider" />
+          <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AccountProfiles" Relationship="Self.FK_AccountProfile_UserRole" FromRole="UserRole" ToRole="AccountProfile" />
+        </EntityType>
+        <EntityType Name="UserStatusType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AccountProfiles" Relationship="Self.FK_AccountProfile_UserStatusTypes" FromRole="UserStatusTypes" ToRole="AccountProfile" />
+        </EntityType>
+        <EntityType Name="WorkOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceProviderID" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceProvider" Relationship="InvoiceHandlingModel.FK_WorkOrder_ServiceProvider" FromRole="WorkOrder" ToRole="ServiceProvider" />
+          <Property Name="PropertyHolderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PHAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PHPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TaskId" Type="Int32" />
+          <NavigationProperty Name="Task" Relationship="InvoiceHandlingModel.FK_WorkOrder_Task" FromRole="WorkOrder" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_AccountProfile_SystemUsers">
+          <End Role="SystemUsers" Type="Self.SystemUser" Multiplicity="1" />
+          <End Role="AccountProfile" Type="Self.AccountProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountProfile">
+              <PropertyRef Name="SystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountProfile_UserRole">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="AccountProfile" Type="Self.AccountProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountProfile">
+              <PropertyRef Name="UserRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountProfile_UserStatusTypes">
+          <End Role="UserStatusTypes" Type="Self.UserStatusType" Multiplicity="1" />
+          <End Role="AccountProfile" Type="Self.AccountProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStatusTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountProfile">
+              <PropertyRef Name="UserStatusTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItem_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="InvoiceItem" Type="Self.InvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceItem">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="InvoiceItem" Type="Self.InvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuotationItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="QuotationItem" Type="Self.QuotationItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuotationItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequestDetails_QuoteRequest">
+          <End Role="QuoteRequest" Type="Self.QuoteRequest" Multiplicity="1" />
+          <End Role="QuoteRequestDetails" Type="Self.QuoteRequestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequestDetails">
+              <PropertyRef Name="QuoteRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InvoiceHandlingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountProfiles" EntityType="Self.AccountProfile" />
+          <EntitySet Name="BankAcounts" EntityType="Self.BankAcount" />
+          <EntitySet Name="ForgotPasswords" EntityType="Self.ForgotPassword" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="InvoiceItems" EntityType="Self.InvoiceItem" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="QuotationItems" EntityType="Self.QuotationItem" />
+          <EntitySet Name="QuoteRequests" EntityType="Self.QuoteRequest" />
+          <EntitySet Name="QuoteRequestDetails" EntityType="Self.QuoteRequestDetail" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="UserStatusTypes" EntityType="Self.UserStatusType" />
+          <EntitySet Name="WorkOrders" EntityType="Self.WorkOrder" />
+          <AssociationSet Name="FK_AccountProfile_SystemUsers" Association="Self.FK_AccountProfile_SystemUsers">
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+            <End Role="AccountProfile" EntitySet="AccountProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountProfile_UserRole" Association="Self.FK_AccountProfile_UserRole">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="AccountProfile" EntitySet="AccountProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountProfile_UserStatusTypes" Association="Self.FK_AccountProfile_UserStatusTypes">
+            <End Role="UserStatusTypes" EntitySet="UserStatusTypes" />
+            <End Role="AccountProfile" EntitySet="AccountProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItem_Invoice" Association="Self.FK_InvoiceItem_Invoice">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="InvoiceItem" EntitySet="InvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceItem_Item" Association="Self.FK_InvoiceItem_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="InvoiceItem" EntitySet="InvoiceItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuotationItem_Item" Association="Self.FK_QuotationItem_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="QuotationItem" EntitySet="QuotationItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequestDetails_QuoteRequest" Association="Self.FK_QuoteRequestDetails_QuoteRequest">
+            <End Role="QuoteRequest" EntitySet="QuoteRequests" />
+            <End Role="QuoteRequestDetails" EntitySet="QuoteRequestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_SystemUsers" Association="InvoiceHandlingModel.FK_Task_SystemUsers">
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <EntitySet Name="ActivityLogs" EntityType="InvoiceHandlingModel.ActivityLog" />
+          <EntitySet Name="JobCategories" EntityType="InvoiceHandlingModel.JobCategory" />
+          <EntitySet Name="ServiceProviders" EntityType="InvoiceHandlingModel.ServiceProvider" />
+          <AssociationSet Name="FK_ServiceProvider_AccountProfile" Association="InvoiceHandlingModel.FK_ServiceProvider_AccountProfile">
+            <End Role="AccountProfile" EntitySet="AccountProfiles" />
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankAcount_ServiceProvider" Association="InvoiceHandlingModel.FK_BankAcount_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="BankAcount" EntitySet="BankAcounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_ServiceProvider" Association="InvoiceHandlingModel.FK_Invoice_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceProvider_JobCategory" Association="InvoiceHandlingModel.FK_ServiceProvider_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategories" />
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequestDetails_ServiceProvider" Association="InvoiceHandlingModel.FK_QuoteRequestDetails_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="QuoteRequestDetail" EntitySet="QuoteRequestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkOrder_ServiceProvider" Association="InvoiceHandlingModel.FK_WorkOrder_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="WorkOrder" EntitySet="WorkOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequest_JobCategory" Association="InvoiceHandlingModel.FK_QuoteRequest_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategories" />
+            <End Role="QuoteRequest" EntitySet="QuoteRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkOrder_Task" Association="InvoiceHandlingModel.FK_WorkOrder_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="WorkOrder" EntitySet="WorkOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteRequest_Task" Association="InvoiceHandlingModel.FK_QuoteRequest_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="QuoteRequest" EntitySet="QuoteRequests" />
+          </AssociationSet>
+          <EntitySet Name="Quotations" EntityType="InvoiceHandlingModel.Quotation" />
+          <AssociationSet Name="FK_Quotation_Quotation" Association="InvoiceHandlingModel.FK_Quotation_Quotation">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="Quotation" EntitySet="Quotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotation_QuoteRequest" Association="InvoiceHandlingModel.FK_Quotation_QuoteRequest">
+            <End Role="QuoteRequest" EntitySet="QuoteRequests" />
+            <End Role="Quotation" EntitySet="Quotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuotationItem_Quotation" Association="InvoiceHandlingModel.FK_QuotationItem_Quotation">
+            <End Role="Quotation" EntitySet="Quotations" />
+            <End Role="QuotationItem" EntitySet="QuotationItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_JobCategory" Association="InvoiceHandlingModel.FK_Task_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategories" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_ServiceProvider" Association="InvoiceHandlingModel.FK_Task_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <EntitySet Name="Feedbacks" EntityType="InvoiceHandlingModel.Feedback" />
+          <AssociationSet Name="FK_Feedback_JobCategory" Association="InvoiceHandlingModel.FK_Feedback_JobCategory">
+            <End Role="JobCategory" EntitySet="JobCategories" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_ServiceProvider" Association="InvoiceHandlingModel.FK_Feedback_ServiceProvider">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Task_SystemUsers">
+          <End Type="InvoiceHandlingModel.SystemUser" Role="SystemUser" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="CallerSystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="EntityId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="JobCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceProviders" Relationship="InvoiceHandlingModel.FK_ServiceProvider_JobCategory" FromRole="JobCategory" ToRole="ServiceProvider" />
+          <NavigationProperty Name="QuoteRequests" Relationship="InvoiceHandlingModel.FK_QuoteRequest_JobCategory" FromRole="JobCategory" ToRole="QuoteRequest" />
+          <NavigationProperty Name="Tasks" Relationship="InvoiceHandlingModel.FK_Task_JobCategory" FromRole="JobCategory" ToRole="Task" />
+          <NavigationProperty Name="Feedbacks" Relationship="InvoiceHandlingModel.FK_Feedback_JobCategory" FromRole="JobCategory" ToRole="Feedback" />
+        </EntityType>
+        <EntityType Name="ServiceProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountProfileId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AccountProfile" Relationship="InvoiceHandlingModel.FK_ServiceProvider_AccountProfile" FromRole="ServiceProvider" ToRole="AccountProfile" />
+          <NavigationProperty Name="BankAcounts" Relationship="InvoiceHandlingModel.FK_BankAcount_ServiceProvider" FromRole="ServiceProvider" ToRole="BankAcount" />
+          <NavigationProperty Name="Invoices" Relationship="InvoiceHandlingModel.FK_Invoice_ServiceProvider" FromRole="ServiceProvider" ToRole="Invoice" />
+          <NavigationProperty Name="JobCategory" Relationship="InvoiceHandlingModel.FK_ServiceProvider_JobCategory" FromRole="ServiceProvider" ToRole="JobCategory" />
+          <NavigationProperty Name="QuoteRequestDetails" Relationship="InvoiceHandlingModel.FK_QuoteRequestDetails_ServiceProvider" FromRole="ServiceProvider" ToRole="QuoteRequestDetail" />
+          <NavigationProperty Name="WorkOrders" Relationship="InvoiceHandlingModel.FK_WorkOrder_ServiceProvider" FromRole="ServiceProvider" ToRole="WorkOrder" />
+          <NavigationProperty Name="Quotations" Relationship="InvoiceHandlingModel.FK_Quotation_Quotation" FromRole="ServiceProvider" ToRole="Quotation" />
+          <NavigationProperty Name="Tasks" Relationship="InvoiceHandlingModel.FK_Task_ServiceProvider" FromRole="ServiceProvider" ToRole="Task" />
+          <NavigationProperty Name="Feedbacks" Relationship="InvoiceHandlingModel.FK_Feedback_ServiceProvider" FromRole="ServiceProvider" ToRole="Feedback" />
+        </EntityType>
+        <Association Name="FK_ServiceProvider_AccountProfile">
+          <End Type="InvoiceHandlingModel.AccountProfile" Role="AccountProfile" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProvider">
+              <PropertyRef Name="AccountProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankAcount_ServiceProvider">
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.BankAcount" Role="BankAcount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAcount">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_ServiceProvider">
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="ServiceProvideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceProvider_JobCategory">
+          <End Type="InvoiceHandlingModel.JobCategory" Role="JobCategory" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProvider">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequestDetails_ServiceProvider">
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.QuoteRequestDetail" Role="QuoteRequestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequestDetail">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkOrder_ServiceProvider">
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="0..1" />
+          <End Type="InvoiceHandlingModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="ServiceProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequest_JobCategory">
+          <End Type="InvoiceHandlingModel.JobCategory" Role="JobCategory" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.QuoteRequest" Role="QuoteRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequest">
+              <PropertyRef Name="JobCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkOrder_Task">
+          <End Type="InvoiceHandlingModel.Task" Role="Task" Multiplicity="0..1" />
+          <End Type="InvoiceHandlingModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkOrder">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteRequest_Task">
+          <End Type="InvoiceHandlingModel.Task" Role="Task" Multiplicity="0..1" />
+          <End Type="InvoiceHandlingModel.QuoteRequest" Role="QuoteRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteRequest">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Quotation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefferenceId" Type="Int32" />
+          <Property Name="ApprovedAdminId" Type="Int32" />
+          <Property Name="EstimatedSubTotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="EstimatedServiceFee" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="EstimatedTotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="JobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="QuatationRequestId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceProvider" Relationship="InvoiceHandlingModel.FK_Quotation_Quotation" FromRole="Quotation" ToRole="ServiceProvider" />
+          <NavigationProperty Name="QuoteRequest" Relationship="InvoiceHandlingModel.FK_Quotation_QuoteRequest" FromRole="Quotation" ToRole="QuoteRequest" />
+          <NavigationProperty Name="QuotationItems" Relationship="InvoiceHandlingModel.FK_QuotationItem_Quotation" FromRole="Quotation" ToRole="QuotationItem" />
+        </EntityType>
+        <Association Name="FK_Quotation_Quotation">
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.Quotation" Role="Quotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quotation">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotation_QuoteRequest">
+          <End Type="InvoiceHandlingModel.QuoteRequest" Role="QuoteRequest" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.Quotation" Role="Quotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quotation">
+              <PropertyRef Name="QuatationRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuotationItem_Quotation">
+          <End Type="InvoiceHandlingModel.Quotation" Role="Quotation" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.QuotationItem" Role="QuotationItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quotation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuotationItem">
+              <PropertyRef Name="QuotationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_JobCategory">
+          <End Type="InvoiceHandlingModel.JobCategory" Role="JobCategory" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="JobCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_ServiceProvider">
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="0..1" />
+          <End Type="InvoiceHandlingModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyHolderName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
+          <Property Name="RatingLevel" Type="Int32" />
+          <Property Name="JobType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JobCategory" Relationship="InvoiceHandlingModel.FK_Feedback_JobCategory" FromRole="Feedback" ToRole="JobCategory" />
+          <NavigationProperty Name="ServiceProvider" Relationship="InvoiceHandlingModel.FK_Feedback_ServiceProvider" FromRole="Feedback" ToRole="ServiceProvider" />
+        </EntityType>
+        <Association Name="FK_Feedback_JobCategory">
+          <End Type="InvoiceHandlingModel.JobCategory" Role="JobCategory" Multiplicity="0..1" />
+          <End Type="InvoiceHandlingModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_ServiceProvider">
+          <End Type="InvoiceHandlingModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="InvoiceHandlingModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InvoiceHandlingModelStoreContainer" CdmEntityContainer="InvoiceHandlingEntities">
+          <EntitySetMapping Name="AccountProfiles">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.AccountProfile">
+              <MappingFragment StoreEntitySet="AccountProfile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Nic" ColumnName="Nic" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="SystemUserId" ColumnName="SystemUserId" />
+                <ScalarProperty Name="UserStatusTypeId" ColumnName="UserStatusTypeId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAcounts">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.BankAcount">
+              <MappingFragment StoreEntitySet="BankAcount">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="ServiceProviderId" ColumnName="ServiceProviderId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForgotPasswords">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.ForgotPassword">
+              <MappingFragment StoreEntitySet="ForgotPassword">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ResetedBy" ColumnName="ResetedBy" />
+                <ScalarProperty Name="ResetedDate" ColumnName="ResetedDate" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ServiceProvideId" ColumnName="ServiceProvideId" />
+                <ScalarProperty Name="Quentity" ColumnName="Quentity" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="ServiceFee" ColumnName="ServiceFee" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="InvoiceSubject" ColumnName="InvoiceSubject" />
+                <ScalarProperty Name="InvoiceStatus" ColumnName="InvoiceStatus" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceItems">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.InvoiceItem">
+              <MappingFragment StoreEntitySet="InvoiceItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="EstimatedQuentity" ColumnName="EstimatedQuentity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuotationItems">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.QuotationItem">
+              <MappingFragment StoreEntitySet="QuotationItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuotationId" ColumnName="QuotationId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteRequests">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.QuoteRequest">
+              <MappingFragment StoreEntitySet="QuoteRequest">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="JobCategoryId" ColumnName="JobCategoryId" />
+                <ScalarProperty Name="PHPhoneNumber" ColumnName="PHPhoneNumber" />
+                <ScalarProperty Name="PHAddress" ColumnName="PHAddress" />
+                <ScalarProperty Name="PropertyHolderName" ColumnName="PropertyHolderName" />
+                <ScalarProperty Name="isQuotationCreated" ColumnName="isQuotationCreated" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteRequestDetails">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.QuoteRequestDetail">
+              <MappingFragment StoreEntitySet="QuoteRequestDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuoteRequestId" ColumnName="QuoteRequestId" />
+                <ScalarProperty Name="ServiceProviderId" ColumnName="ServiceProviderId" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="ServiceProviderId" ColumnName="ServiceProviderId" />
+                <ScalarProperty Name="MaximumBudget" ColumnName="MaximumBudget" />
+                <ScalarProperty Name="JobCategoryId" ColumnName="JobCategoryId" />
+                <ScalarProperty Name="CallerSystemUserId" ColumnName="CallerSystemUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="PropertyHolderName" ColumnName="PropertyHolderName" />
+                <ScalarProperty Name="PHAddress" ColumnName="PHAddress" />
+                <ScalarProperty Name="PHPhoneNumber" ColumnName="PHPhoneNumber" />
+                <ScalarProperty Name="AssignStatus" ColumnName="AssignStatus" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserStatusTypes">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.UserStatusType">
+              <MappingFragment StoreEntitySet="UserStatusTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkOrders">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.WorkOrder">
+              <MappingFragment StoreEntitySet="WorkOrder">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="PHPhoneNumber" ColumnName="PHPhoneNumber" />
+                <ScalarProperty Name="PHAddress" ColumnName="PHAddress" />
+                <ScalarProperty Name="PropertyHolderName" ColumnName="PropertyHolderName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ServiceProviderID" ColumnName="ServiceProviderID" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityLogs">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.ActivityLog">
+              <MappingFragment StoreEntitySet="ActivityLog">
+                <ScalarProperty Name="EntityId" ColumnName="EntityId" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobCategories">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.JobCategory">
+              <MappingFragment StoreEntitySet="JobCategory">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceProviders">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.ServiceProvider">
+              <MappingFragment StoreEntitySet="ServiceProvider">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="AccountProfileId" ColumnName="AccountProfileId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quotations">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.Quotation">
+              <MappingFragment StoreEntitySet="Quotation">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="QuatationRequestId" ColumnName="QuatationRequestId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ServiceProviderId" ColumnName="ServiceProviderId" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="EstimatedTotal" ColumnName="EstimatedTotal" />
+                <ScalarProperty Name="EstimatedServiceFee" ColumnName="EstimatedServiceFee" />
+                <ScalarProperty Name="EstimatedSubTotal" ColumnName="EstimatedSubTotal" />
+                <ScalarProperty Name="ApprovedAdminId" ColumnName="ApprovedAdminId" />
+                <ScalarProperty Name="RefferenceId" ColumnName="RefferenceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="InvoiceHandlingModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="RatingLevel" ColumnName="RatingLevel" />
+                <ScalarProperty Name="ServiceProviderId" ColumnName="ServiceProviderId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="PropertyHolderName" ColumnName="PropertyHolderName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

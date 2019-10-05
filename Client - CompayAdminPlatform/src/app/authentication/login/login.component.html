@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+      <div class=" login">
+       <div class="col-md-3"></div>
+         <div class="col-md-6">
+
+            <div class="top">
+                <h1 id="title"><span id="logo">MyJob<span>App</span></span></h1>
+              </div>
+
+            <div class="lad-box animated fadeInUp">
+            <div class="box-header">   
+                <h2 style="text-align: center"><b>Login</b></h2>
+            </div> 
+            <br>
+            <div class="form-group">
+              <label>Email</label> 
+               <br>
+                <input type="text" required email [(ngModel)]="login.userName" #userName="ngModel"/>
+                 <div class="alert alert-danger" *ngIf="userName.touched && !userName.valid">valid email address is required</div>
+            </div>
+
+            <div class="form-group">
+              <label>Password</label>
+               <br>
+                <input type="password" required minlength="8" maxlength="12" [(ngModel)]="login.password" #password="ngModel"/>
+                  <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Valid password is required</div>
+              </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="signin()">Login</button>
+                <p *ngIf="errorOccured" class="text-danger">Invalid user details. Please try again !</p>
+            </div>
+            
+            <p class="small"><a [routerLink]="['/signup']"><b>Register here</b></a></p>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div>
+  
+

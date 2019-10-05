@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-md-12">
+   <h1 class="page-header">
+    Dashboard <small>Summary of your Web</small>
+  </h1>
+  </div>
+</div>
+<!-- /. ROW  -->
+
+<div class="row">
+  
+  <div class="col-md-4 col-sm-4">
+    <div class="panel panel-primary panel">
+      <div class="panel-heading">
+        <button [routerLink]="['/invoice']" type="button" class="btn btn-outline-info btn-info-link btn-lg">Payment Status</button> 
+      </div>
+      <div class="panel-body">
+        <ul class="list-group list-group-flush">
+         <li class="list-group-item" *ngFor="let payment of invoiceDetails">
+          <div class="row">
+           <div class="col-md-7"><strong>{{payment.InvoiceSubject}}</strong></div>
+            <div class="col-md-5">
+              <span class="float-right">{{payment.InvoiceStatus == 0 ? 'Not Paid' : 'Paid'}}</span>
+            </div>
+           </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-4">
+    <div class="panel panel-primary panel">
+      <div class="panel-heading">
+        <button [routerLink]="['/task']" type="button" class="btn btn-outline-info btn-info-link btn-lg">Updated Task</button>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let task of taskDetails">
+            <div class="row">
+              <div class="col-md-7"><strong>{{task.PropertyHolderName}}</strong></div>
+              <div class="col-md-5">
+                <span class="float-right">{{task.DueDate | date: 'dd/MM/yyyy'}}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-4">
+    <div class="panel panel-primary panel">
+      <div class="panel-heading">
+        <button [routerLink]="['/activitylog']" type="button" class="btn btn-outline-info btn-info-link btn-lg">Activity Log</button>  
+      </div>
+      <div class="panel-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let activity of activityList">
+            <div class="row">
+              <div class="col-md-7"><strong>{{activity.Name}}</strong></div>
+              <div class="col-md-5">
+                <span class="float-right">{{activity.CreatedAt | date: 'dd/MM/yyyy'}}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

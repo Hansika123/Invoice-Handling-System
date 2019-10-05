@@ -1,0 +1,153 @@
+<div *ngIf="!isNewRequest">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        Quotation Requests
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+  <!-- /. ROW  -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Advanced Tables -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Detail list
+        </div>
+        <div class="btn-new-request">
+          <button class="btn btn-primary" (click)="setAsCreateNew()">New Request</button>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Request Name</th>
+                  <th>purpose</th>
+                  <th>Date</th>
+                  <th>Due Date</th>
+                  <th>Job Category</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of quoteRequests" class="odd gradeX">
+                  <td>{{item.QuatationRequestId}}</td>
+                  <td>{{item.RequestName}}</td>
+                  <td>{{item.RequestDescription}}</td>
+                  <td>{{item.CreatedAt | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{item.DueDate | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{item.JobCategoryDetail.Name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <!--End Advanced Tables -->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isNewRequest">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        Quotation Requests
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label>Request Name:</label>
+              <input type="text" [(ngModel)]="quoteRequest.requestName" #requestName="ngModel" class="form-control" required name="requestName" />
+              <div *ngIf="requestName.errors && (requestName.dirty ||requestName.touched)" class="alert alert-danger">
+                  <div [hidden]="!requestName.errors.required">
+                    Request name is required!
+                  </div>
+                </div>          
+              </div>
+            <div class="form-group col-md-6">
+              <label>Description</label>
+              <input type="text" [(ngModel)]="quoteRequest.requestDescription" #requestDescription="ngModel" class="form-control" required name="requestName" />
+              <div *ngIf="requestDescription.errors && (requestDescription.dirty ||requestDescription.touched)" class="alert alert-danger">
+                  <div [hidden]="!requestDescription.errors.required">
+                    Request description is required!
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="validationCustom01">Property Holder Name</label>
+              <input type="text" class="form-control" [(ngModel)]="quotDetails.PropertyHolderName" #PropertyHolderName="ngModel" class="form-control" required name="PropertyHolderName" />
+              <div *ngIf="PropertyHolderName.errors && (PropertyHolderName.dirty ||PropertyHolderName.touched)" class="alert alert-danger">
+                  <div [hidden]="!PropertyHolderName.errors.required">
+                    Property holder name is required!
+                 </div>
+               </div>  
+            </div>
+            <div class="form-group col-md-6">
+              <label for="validationCustom01">Property Holder Phone Number</label>
+              <input type="text" class="form-control" [(ngModel)]="quotDetails.PHPhoneNumber" #PHPhoneNumber="ngModel" class="form-control" required name="PHPhoneNumber" maxlength="10" minlength="10" />
+              <div *ngIf="PHPhoneNumber.errors && (PHPhoneNumber.dirty ||PHPhoneNumber.touched)" class="alert alert-danger">
+                  <div [hidden]="!PHPhoneNumber.errors.required">
+                    Enter contact Number,
+                 </div>
+                 <div [hidden]="!itemName.errors.minlength">
+                    Valid contact number is required!
+                  </div>
+               </div>  
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputAddress">Property Holder Address</label>
+              <input type="text" class="form-control" [(ngModel)]="quotDetails.PHAddress" #PHAddress="ngModel" class="form-control" required name="PHAddress">
+              <div *ngIf="PHAddress.errors && (PHAddress.dirty ||PHAddress.touched)" class="alert alert-danger">
+                  <div [hidden]="!PHAddress.errors.required">
+                    Property holder address is required!
+                 </div>
+               </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label>Due Date</label>
+              <input type="date" [(ngModel)]="quoteRequest.dueDate" #dueDate="ngModel" class="form-control" min="{{todate | date:'yyyy-MM-dd'}}" required />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputState">Service Provider</label>
+              <select id="inputState" class="form-control" [(ngModel)]="selectedCategory">
+                <option *ngFor='let category of categories' [ngValue]="category">{{category.Id === 3 ? 'Plumbery' : category.Name}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-6"></div>
+            <div class="form-group col-md-6">
+                <button style="float:right" class="btn btn-primary" (click)="setAsViewAll()">View All Requests</button>
+              <button style="float:right; margin-right: 10px;" class="btn btn-primary" (click)="createQuoteRequest()">Create Request</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

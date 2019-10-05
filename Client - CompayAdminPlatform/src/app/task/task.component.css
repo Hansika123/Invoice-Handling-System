@@ -1,0 +1,18 @@
+.float-right{
+  float: right;
+}
+
+.btn-new-request{
+  padding-right: 15px;
+  padding-top: 10px;
+  float: right;
+  padding-bottom: 10px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}

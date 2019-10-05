@@ -1,0 +1,73 @@
+<nav class="navbar navbar-default top-navbar" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand nav-bar-brand-name" [routerLink]="['/']"><b>MyJob</b>WEB</a>
+  </div>
+
+  <ul class="nav navbar-top-links navbar-right">
+    <li style="color:white;padding-right: 50px;"><strong>{{userFirstName}} {{userLastName}}</strong></li>
+    <li class="divider"></li>
+    <li><a href="javascript:void()" (click)="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+    </li>
+  </ul>
+  <!-- /.dropdown-user -->
+
+</nav>
+<!--/. NAV TOP  -->
+
+<nav class="navbar-default navbar-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav" id="main-menu">
+
+      <li *ngIf="!isCaller">
+        <a routerLinkActive="active-menu" [routerLink]="['/dashboard']" [routerLinkActiveOptions]="{exact:
+          true}"><i
+            class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['/task']"><i class="fa fa-desktop"></i>Task</a>
+      </li>
+      <li *ngIf="!isCaller">
+        <a routerLinkActive="active-menu" [routerLink]="['/workorder']" (click)="goToWorkOrder()"><i class="fa fa-bar-chart-o"></i>
+          Work orders</a>
+      </li>
+      <li *ngIf="!isCaller">
+        <a href="javascript:void(0)"><i class="fa fa-sitemap"></i> Quotation<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <li>
+            <a routerLinkActive="active-menu" [routerLink]="'/receivedquotation'">Received Quotation</a>
+          </li>
+          <li>
+            <a routerLinkActive="active-menu" [routerLink]="['/requestquotation']" (click)="gotToQuatationRequest()">Quotation
+              Request</a>
+          </li>
+        </ul>
+
+      </li>
+
+      <li *ngIf="!isCaller">
+        <a [routerLink]="['/invoice']" routerLinkActive="active-menu"><i class="fa fa-table"></i> Invoices</a>
+      </li>
+      <li *ngIf="!isCaller">
+        <a [routerLink]="['/activitylog']" routerLinkActive="active-menu"><i class="fa fa-edit"></i>Activity Log </a>
+      </li>
+      <li *ngIf="!isCaller">
+        <a [routerLink]="['/useraccount']" routerLinkActive="active-menu"><i class="fa fa-edit"></i>User Accounts </a>
+      </li>
+      <li *ngIf="isCaller">
+        <a [routerLink]="['/feedback']" routerLinkActive="active-menu"><i class="fa fa-edit"></i>Feedback </a>
+      </li>
+      <!-- <li>
+        <a href="javascript:void()" (click)="logout()"><i class="fa fa-fw fa-file"></i> Log Out</a>
+      </li> -->
+    </ul>
+
+  </div>
+
+</nav>
+<!-- /. NAV SIDE  -->

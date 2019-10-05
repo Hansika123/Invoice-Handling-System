@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default top-navbar" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand nav-bar-brand-name" style="width: 260px;" [routerLink]="['/']"><b>MyJob</b>WEB</a>
+  </div>
+
+  <div class="sidebar-collapse">
+    <ul class="nav navbar-top-links" id="main-menu">
+
+      <li>
+        <a routerLinkActive="active-menu" [routerLinkActiveOptions]="{exact:
+            true}" [routerLink]="['/dashboard']"
+          class="router-link"><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['/quotation']" class="router-link"><i class="fa fa-bar-chart-o"></i>
+          Quotation</a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['/workorder']" class="router-link"><i class="fa fa-bar-chart-o"></i>
+          Work orders</a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['/invoice']" class="router-link"><i class="fa fa-table"></i>
+          Invoices</a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['/bankaccount']" class="router-link"><i class="fa fa-table"></i>
+          Bank Account</a>
+      </li>
+      <!-- <li style="color:white;padding-right: 50px;"><strong>{{userFirstName}} {{userLastName}}</strong></li> -->
+      <li style="padding-right: 20px;float:right"><a href="javascript:void()" (click)="logout()" class="router-link"><i
+            class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+    </ul>
+  </div>
+</nav>

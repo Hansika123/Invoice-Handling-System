@@ -1,0 +1,112 @@
+<div *ngIf="!isUpdating">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        Work Orders
+      </h1>
+    </div>
+  </div>
+  <!-- /. ROW  -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Advanced Tables -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Detail list
+        </div>
+        <p *ngIf="errorOccured" class="text-danger">Internal error occured. PLease try again !</p>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Description</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of workOrders" class="odd gradeX">
+                  <td>{{item.Id}}</td>
+                  <td>{{item.Description}}</td>
+                  <td>{{item.DueDate | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{item.Status == 0 ? 'Not Completed' : item.Status == 1 ? 'Completed' : 'Fail'}}</td>
+                  <td><button class="btn btn-primary float-right" (click)="updateStatus(item)">Update Status</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <!--End Advanced Tables -->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isUpdating">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        Update Work Order
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <label>Description</label>
+              <input [disabled]="isDisable" type="text" [(ngModel)]="selectedWorkOrder.Description" #description="ngModel" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label for="validationCustom01">Property Holder Name</label>
+              <input [disabled]="isDisable" type="text" class="form-control" [(ngModel)]="selectedWorkOrder.PropertyHolderName">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputAddress">Property Holder Address</label>
+              <input [disabled]="isDisable" type="text" class="form-control" [(ngModel)]="selectedWorkOrder.PHAddress">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="validationCustom01">Property Holder Phone Number</label>
+              <input [disabled]="isDisable" type="number" class="form-control" [(ngModel)]="selectedWorkOrder.PHPhoneNumber">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="inputState">Assign Status</label>
+              <select id="inputState" class="form-control" [(ngModel)]="selectedValue">
+                <option [ngValue]="0">Not Completed</option>
+                <option [ngValue]="1">Completed</option>
+                <option [ngValue]="2">Fail</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-6"></div>
+            <div class="form-group col-md-6">
+              <button style="float:right" class="btn btn-primary" (click)="updateWorkOrder()">Update Work Order</button>
+              <button style="float:right; margin-right: 10px;" class="btn btn-primary" (click)="setAsViewAll()">View
+                All Work Orders</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

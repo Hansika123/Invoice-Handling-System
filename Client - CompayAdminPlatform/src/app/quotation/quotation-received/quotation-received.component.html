@@ -1,0 +1,164 @@
+<div *ngIf="!isViewQuatation">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        Received Quotation
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Advanced Tables -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Detail list
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>Ref No</th>
+                  <th>Request Name</th>
+                  <th>Job Description</th>
+                  <th>Client</th>
+                  <th>Estimate</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd gradeX" *ngFor="let quatation of quatationList">
+                    <td>{{quatation.Id}}</td>
+                  <td>{{quatation.QuatationRequestDetail.RequestName}}</td>
+                  <td>{{quatation.JobDescription}}</td>
+                  <td>{{quatation.ServiceProviderName}}</td>
+                  <td>{{'Rs. ' + quatation.EstimatedTotal}}</td>
+                  <td>{{quatation.Status == 0 ? 'Pending' : quatation.Status == 1 ? 'Accepted' : 'Rejected'}}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary" (click)="viewQuatation(quatation)">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <!--End Advanced Tables -->
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isViewQuatation">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        View Quotation
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Advanced Tables -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="card">
+            <div class="card-body">
+              <div class="row mb-4">
+                <div style="float:right;padding-right: 20px;">
+                  <div>Reference No: {{quatation.Id}}</div>
+                  <div>Quote No: {{quatation.RefferenceId}}</div>
+                  <div>Date:{{quatation.CreatedAt | date: 'dd/MM/yyyy'}}</div>
+                  <h6 class="mb-3">To:</h6>
+                  <div>
+                    <strong>StatraNEXTGEn(Pvt).Ltd</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-sm-6">
+                  <h6 class="mb-3">From:</h6>
+                  <div>
+                    <strong>{{quatation.ServiceProviderName}}</strong>
+                  </div>
+                  <div>{{quatation.ServiceProviderAddress}}</div>
+                </div>
+              </div>
+              <br /><br />
+              <div class="table-responsive-sm">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Description</th>
+                      <th class="right">Unit Cost</th>
+                      <th class="center">Qty</th>
+                      <th class="right">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of quatation.Items">
+                      <td class="left strong">{{item.ItemName}}</td>
+                      <td class="left">{{item.ItemDescription}}</td>
+                      <td class="right">{{'Rs.' + item.UnitPrice}}</td>
+                      <td class="center">{{item.EstimatedQuentity}}</td>
+                      <td class="right">{{item.UnitPrice * item.EstimatedQuentity}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <div class="col-sm-8">
+                </div>
+
+                <div class="col-sm-4 ml-auto" style="padding-right: 50px;">
+                  <table class="table table-clear">
+                    <tbody>
+                      <tr>
+                        <td class="left">
+                          <strong>SubTotal</strong>
+                        </td>
+                        <td class="right">{{quatation.EstimatedSubTotal}}</td>
+                      </tr>
+                      <tr>
+                        <td class="left">
+                          <strong>Service Fee</strong>
+                        </td>
+                        <td class="right">{{quatation.EstimatedServiceFee}}</td>
+                      </tr>
+                      <tr>
+                        <td class="left">
+                          <strong>Total</strong>
+                        </td>
+                        <td class="right">{{quatation.EstimatedTotal}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-6"></div>
+            <div class="form-group col-md-6">
+              <button style="float:right" class="btn btn-primary" (click)="setAsViewAll()">View All Quatation</button>
+              <button style="float:right; margin-right: 10px;" class="btn btn-primary" (click)="rejectQuatation('2')">Reject</button>
+              <button style="float:right; margin-right: 10px;" class="btn btn-primary" (click)="acceptQuatation('1')">Accept</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

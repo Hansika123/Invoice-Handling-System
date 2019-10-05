@@ -1,0 +1,145 @@
+<div *ngIf="!isViewMode">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        User Accounts
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+  <!-- /. ROW  -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Advanced Tables -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Detail list
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>User Category</th>
+                  <th>Name</th>
+                  <th>Rating Level</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of userList" class="odd gradeX">
+                  <td>{{user.JobCategoryDetail.Name}}</td>
+                  <td>{{user.UserAccountDetails.FirstName}}</td>
+                  <td>{{user.FeedbackLevel === 1 ? 'Very Satisfied' : user.FeedbackLevel === 2 ? 'Satisfied' : user.FeedbackLevel === 3 ? 'OK' : 'Dissatisfied'}}</td>
+                  <td>
+                    <button class="btn btn-primary" (click)="viewUserDetails(user)">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--End Advanced Tables -->
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isViewMode">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        User Account Detail
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 ">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="col-md-3"></div>
+
+          <div class="col-md-6" style="border: 1px solid black;">
+
+            <div class="form-group">
+              <div class="form-group col-md-12" style="text-align: center;">
+                <label>{{userDetail.UserAccountDetails.FirstName}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-12" style="text-align: center;">
+                <label>{{userDetail.JobCategoryDetail.Name}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-12" style="text-align: center;">
+                <label style="padding-right: 12px;">Rating Level:</label>
+                <label style="color: royalblue;">{{userDetail.FeedbackLevel === 1 ? 'Very Satisfied' : userDetail.FeedbackLevel === 2 ? 'Satisfied' : userDetail.FeedbackLevel === 3 ? 'OK' : 'Dissatisfied'}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-12">
+                <label style="padding-right: 20px;">Phone No:</label>
+                <label>{{userDetail.UserAccountDetails.MobileNumber}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-12">
+                <label style="padding-right: 32px;">Address:</label>
+                <label>{{userDetail.UserAccountDetails.Address}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-12">
+                <label style="padding-right: 23px;">Company:</label>
+                <label>{{userDetail.CompanyName}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-6">
+                <label style="padding-right: 11px;">Account No:</label>
+                <label>{{userDetail.BankDetail.AccountNumber}}</label>
+              </div>
+              <div class="form-group col-md-6">
+                <label style="padding-right: 20px;">Account Name:</label>
+                <label>{{userDetail.BankDetail.AccountName}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-6">
+                <label style="padding-right: 41px;">Branch:</label>
+                <label>{{userDetail.BankDetail.Branch}}</label>
+              </div>
+              <div class="form-group col-md-6">
+                <label style="padding-right: 83px;">Bank:</label>
+                <label>{{userDetail.BankDetail.Bank}}</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-group col-md-6"></div>
+              <div class="form-group col-md-6">
+                <button style="float:right" class="btn btn-primary" (click)="goBack()">Close</button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

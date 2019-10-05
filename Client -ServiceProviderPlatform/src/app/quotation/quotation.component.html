@@ -1,0 +1,185 @@
+<div *ngIf="!isNewRequest">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        Received Quotation
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+  <!-- /. ROW  -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Advanced Tables -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Detail list
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>Request Name</th>
+                  <th>Description</th>
+                  <th>Property Holder Name</th>
+                  <th>Property Holder PhoneNumber</th>
+                  <th>Property Holder Address</th>
+                  <th>Date</th>
+                  <th>Due Date</th>
+
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of quoteRequests" class="odd gradeX">
+                  <td>{{item.RequestName}}</td>
+                  <td>{{item.RequestDescription}}</td>
+                  <td>{{item.PropertyHolderName}}</td>
+                  <td>{{item.PHPhoneNumber}}</td>
+                  <td>{{item.PHAddress}}</td>
+                  <td>{{item.DueDate | date: 'dd/MM/yyyy'}}</td>
+                  <td> <button class="btn btn-primary" [disabled]="item.isQuotationCreated" (click)="createQuotationModel(item)">Create Quotation</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <!--End Advanced Tables -->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isNewRequest">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-header">
+        Create Quotation
+      </h1>
+    </div>
+    <notifier-container></notifier-container>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <h4>Quotation Details</h4>
+              <hr>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <label>Job Description</label>
+              <input type="text" class="form-control" [(ngModel)]="quotation.jobDescription" #jobDescription="ngModel" required name="jobDescription"/>
+              <div *ngIf="jobDescription.errors && (jobDescription.dirty ||jobDescription.touched)" class="alert alert-danger">
+                <div [hidden]="!jobDescription.errors.required">
+                  jobDescription is required!
+                </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <h4>Quotation Items Details</h4>
+              <hr>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label>Item Name</label>
+              <input type="text" class="form-control" [(ngModel)]="item.itemName" #itemName="ngModel" required name='itemName' />
+              <div *ngIf="itemName.errors && (itemName.dirty ||itemName.touched)" class="alert alert-danger">
+                <div [hidden]="!itemName.errors.required">
+                  item Name is required!
+                </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <label>Item Description</label>
+              <input type="text" class="form-control" [(ngModel)]="item.itemDescription" #itemDescription="ngModel" required name="itemDescription"/>
+              <div *ngIf="itemDescription.errors && (itemDescription.dirty ||itemDescription.touched)" class="alert alert-danger">
+                <div [hidden]="!itemDescription.errors.required">
+                  item Description is required!
+                </div>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label>Unit Price</label>
+              <input type="number" class="form-control" [(ngModel)]="item.unitPrice" #unitPrice="ngModel" min="0"/>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Estimated Quantity</label>
+              <input type="number" class="form-control" [(ngModel)]="item.estimatedQuentity" #unitPrice="ngModel" min="0" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <button class="btn btn-primary float-right" (click)="addItems(item)">Add Item</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
+                <tr>
+                  <th>Item Name</th>
+                  <th>Unit Price</th>
+                  <th>Description</th>
+                  <th>Estimated Quantity</th>
+                </tr>
+                <tr *ngFor="let element of itemList">
+                  <td>{{element.itemName}}</td>
+                  <td>{{element.unitPrice}}</td>
+                  <td>{{element.itemDescription}}</td>
+                  <td>{{element.estimatedQuentity}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-4">
+              <label>Sub Total</label>
+              <input type="number" class="form-control" [(ngModel)]="quotation.estimatedSubTotal" #estimatedSubTotal="ngModel" min="0" disabled/>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Service Fee</label>
+              <input type="number" class="form-control" [(ngModel)]="quotation.estimatedServiceFee" (input)="onChanage($event.target.value)"
+                #estimatedServiceFee="ngModel" oninput="validity.valid||(value='')"/>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Estimated Total</label>
+              <input type="number" class="form-control" [(ngModel)]="quotation.estimatedTotal" #estimatedTotal="ngModel" disabled/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-12">
+              <button class="btn btn-primary float-right" (click)="createQuotation()">Create Quotation</button>
+              <p *ngIf="errorOccured" class="text-danger">Internal error occured. Please try again !</p>
+              <button class="btn btn-primary float-right" style="margin-right: 10px;" (click)="setAsViewAll()">View All
+                Quotation Requests</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

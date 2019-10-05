@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "dev": "invoice-handling-system",
+    "default": "invoice-handling-system"
+  }
+}

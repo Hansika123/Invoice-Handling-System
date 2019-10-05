@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cda17744ef654126b72091b967903912" Name="Diagram1">
+        <EntityTypeShape EntityType="InvoiceHandlingModel.AccountProfile" Width="1.5" PointX="10" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.BankAcount" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.ForgotPassword" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.Invoice" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.InvoiceItem" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.Item" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.QuotationItem" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.QuoteRequest" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.QuoteRequestDetail" Width="1.875" PointX="8" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.SystemUser" Width="1.5" PointX="7.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.Task" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.UserRole" Width="1.5" PointX="7.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.UserStatusType" Width="1.5" PointX="7.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.WorkOrder" Width="1.5" PointX="3" PointY="21" IsExpanded="true" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_AccountProfile_SystemUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_AccountProfile_UserRole" ManuallyRouted="false" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_AccountProfile_UserStatusTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_InvoiceItem_Invoice" ManuallyRouted="false" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_InvoiceItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_QuotationItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_QuoteRequestDetails_QuoteRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Task_SystemUsers" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.ActivityLog" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.JobCategory" Width="1.5" PointX="10" PointY="15.25" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.ServiceProvider" Width="1.5" PointX="12.25" PointY="4.25" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_ServiceProvider_AccountProfile" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_BankAcount_ServiceProvider" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Invoice_ServiceProvider" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_ServiceProvider_JobCategory" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_QuoteRequestDetails_ServiceProvider" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_WorkOrder_ServiceProvider" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_QuoteRequest_JobCategory" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_WorkOrder_Task" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_QuoteRequest_Task" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.Quotation" Width="1.5" PointX="14.5" PointY="4.75" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Quotation_Quotation" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Quotation_QuoteRequest" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_QuotationItem_Quotation" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Task_JobCategory" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Task_ServiceProvider" />
+        <EntityTypeShape EntityType="InvoiceHandlingModel.Feedback" Width="1.5" PointX="14.5" PointY="10.5" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Feedback_JobCategory" />
+        <AssociationConnector Association="InvoiceHandlingModel.FK_Feedback_ServiceProvider" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

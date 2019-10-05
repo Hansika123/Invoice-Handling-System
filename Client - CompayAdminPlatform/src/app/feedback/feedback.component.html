@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="page-header">
+      Feedback
+    </h1>
+  </div>
+  <notifier-container></notifier-container>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div class="form-group">
+          <div class="form-group col-md-6">
+            <label>Property Holder Name</label>
+            <input type="text" [(ngModel)]="feedbackDetail.PropertyHolderName" #description="ngModel" class="form-control" required />
+          </div>
+          <div class="form-group col-md-6">
+            <label>Job Type</label>
+            <input type="text" class="form-control" [(ngModel)]="feedbackDetail.JobType" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group col-md-6">
+            <label>Service Provider Name</label>
+            <select id="inputState" class="form-control" [(ngModel)]="selectedServiceProvider" required >
+              <option *ngFor='let provider of serviceProviders' [ngValue]="provider">{{provider.UserAccountDetails.FirstName}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group col-md-12">
+            <h4>Level of Satisfaction</h4>
+            <hr>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group col-md-12">
+            <label>Quality of Service:</label>
+            <ul style="list-style: none;">
+              <li>
+                <input type="radio" [value]="1" [(ngModel)]="selectedLevel" name="level">
+                <label style="padding-left: 12px; padding-top: 10px;">Very Satisfied</label>
+              </li>
+              <li>
+                <input type="radio" [value]="2" [(ngModel)]="selectedLevel" name="level">
+                <label style="padding-left: 12px;">Satisfied</label>
+              </li>
+              <li>
+                <input type="radio" [value]="3" [(ngModel)]="selectedLevel" name="level">
+                <label style="padding-left: 12px;">OK</label>
+              </li>
+              <li>
+                <input type="radio" [value]="4" [(ngModel)]="selectedLevel" name="level">
+                <label style="padding-left: 12px;">Dissatisfied</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group col-md-12">
+            <label>Speed of Service:</label>
+            <ul style="list-style: none;">
+              <li>
+                <input type="radio" [value]="1"  name="leve2l">
+                <label style="padding-left: 12px; padding-top: 10px;">Very Satisfied</label>
+              </li>
+              <li>
+                <input type="radio" [value]="2"  name="leve2l">
+                <label style="padding-left: 12px;">Satisfied</label>
+              </li>
+              <li>
+                <input type="radio" [value]="3"  name="leve2l">
+                <label style="padding-left: 12px;">OK</label>
+              </li>
+              <li>
+                <input type="radio" [value]="4" name="leve2l">
+                <label style="padding-left: 12px;">Dissatisfied</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group col-md-12">
+            <label>Helpfulness:</label>
+            <ul style="list-style: none;">
+              <li>
+                <input type="radio" [value]="1"  name="leve3l">
+                <label style="padding-left: 12px; padding-top: 10px;">Very Satisfied</label>
+              </li>
+              <li>
+                <input type="radio" [value]="2"  name="leve3l">
+                <label style="padding-left: 12px;">Satisfied</label>
+              </li>
+              <li>
+                <input type="radio" [value]="3"  name="leve3l">
+                <label style="padding-left: 12px;">OK</label>
+              </li>
+              <li>
+                <input type="radio" [value]="4"  name="leve3l">
+                <label style="padding-left: 12px;">Dissatisfied</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group col-md-6"></div>
+          <div class="form-group col-md-6">
+            <button style="float:right" class="btn btn-primary" (click)="createFeedback()">Save Feedback</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

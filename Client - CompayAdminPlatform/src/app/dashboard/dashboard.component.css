@@ -1,0 +1,21 @@
+.btn-info-link{
+  width: 100%;
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+ul {
+  list-style-type: none;
+  line-height: 2em;
+}
+
+.panel {
+  min-height: 420px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.float-right{
+  float: right;
+}
